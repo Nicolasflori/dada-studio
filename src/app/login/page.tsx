@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
@@ -10,9 +9,7 @@ export default function LoginPage() {
           <p className="font-logo text-2xl leading-none tracking-widest text-ink-900">STUDIO</p>
         </div>
 
-        <Suspense>
-          <LoginForm />
-        </Suspense>
+        <LoginForm />
       </div>
     </div>
   );
