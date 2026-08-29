@@ -54,39 +54,41 @@ export default async function DashboardPage() {
         />
       </div>
 
-      <div className="mt-8 rounded-sm border-2 border-ink-900 bg-surface p-5 shadow-[4px_4px_0_0_var(--ink-900)]">
+      <div className="mt-8 rounded-sm border-2 border-ink-900 bg-surface p-3 shadow-[4px_4px_0_0_var(--ink-900)] md:p-5">
         <h2 className="text-sm font-semibold text-ink-700">Últimos pagos</h2>
         {ultimosPagos.length === 0 ? (
           <p className="mt-3 text-sm text-ink-500">Todavía no hay pagos registrados.</p>
         ) : (
-          <table className="mt-4 w-full text-left text-sm">
-            <thead>
-              <tr className="text-ink-400">
-                <th className="pb-2 font-medium">Alumno</th>
-                <th className="pb-2 font-medium">Profesor</th>
-                <th className="pb-2 font-medium">Monto</th>
-                <th className="pb-2 font-medium">Fecha</th>
-                <th className="pb-2 font-medium">Pago a profesor</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ultimosPagos.map((p) => (
-                <tr key={p.id} className="border-t border-ink-50">
-                  <td className="py-2 text-ink-800">{nombreAlumno(p.alumno_id)}</td>
-                  <td className="py-2 text-ink-600">{nombreProfesor(p.profesor_id)}</td>
-                  <td className="py-2 text-ink-800">{formatoMoneda.format(p.monto)}</td>
-                  <td className="py-2 text-ink-500">{p.fecha}</td>
-                  <td className="py-2">
-                    {pctProfesorDe(p.profesor_id) > 0 ? (
-                      <SelloLiquidacion pagoId={p.id} liquidado={p.liquidado} />
-                    ) : (
-                      <span className="text-xs text-ink-400">—</span>
-                    )}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="mt-4 w-full text-left text-sm">
+              <thead>
+                <tr className="text-ink-400">
+                  <th className="pb-2 font-medium">Alumno</th>
+                  <th className="pb-2 font-medium">Profesor</th>
+                  <th className="pb-2 font-medium">Monto</th>
+                  <th className="pb-2 font-medium">Fecha</th>
+                  <th className="pb-2 font-medium">Pago a profesor</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {ultimosPagos.map((p) => (
+                  <tr key={p.id} className="border-t border-ink-50">
+                    <td className="py-2 text-ink-800">{nombreAlumno(p.alumno_id)}</td>
+                    <td className="py-2 text-ink-600">{nombreProfesor(p.profesor_id)}</td>
+                    <td className="py-2 text-ink-800">{formatoMoneda.format(p.monto)}</td>
+                    <td className="py-2 text-ink-500">{p.fecha}</td>
+                    <td className="py-2">
+                      {pctProfesorDe(p.profesor_id) > 0 ? (
+                        <SelloLiquidacion pagoId={p.id} liquidado={p.liquidado} />
+                      ) : (
+                        <span className="text-xs text-ink-400">—</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

@@ -16,12 +16,12 @@ export default async function PagosPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-display text-2xl font-medium text-ink-900">Pagos</h1>
         <NuevoPagoForm alumnos={alumnos} />
       </div>
 
-      <div className="mt-6 rounded-sm border-2 border-ink-900 bg-surface p-5 shadow-[4px_4px_0_0_var(--ink-900)]">
+      <div className="mt-6 rounded-sm border-2 border-ink-900 bg-surface p-3 shadow-[4px_4px_0_0_var(--ink-900)] md:p-5">
         {pagos.length === 0 ? (
           <p className="text-sm text-ink-500">Todavía no hay pagos registrados.</p>
         ) : (

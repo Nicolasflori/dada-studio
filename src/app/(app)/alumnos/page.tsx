@@ -21,15 +21,16 @@ export default async function AlumnosPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-display text-2xl font-medium text-ink-900">Alumnos</h1>
         <NuevoAlumnoForm clases={clases} profesores={profesores} rolActual={profesorActual?.rol ?? "externo"} />
       </div>
 
-      <div className="mt-6 rounded-sm border-2 border-ink-900 bg-surface p-5 shadow-[4px_4px_0_0_var(--ink-900)]">
+      <div className="mt-6 rounded-sm border-2 border-ink-900 bg-surface p-3 shadow-[4px_4px_0_0_var(--ink-900)] md:p-5">
         {alumnos.length === 0 ? (
           <p className="text-sm text-ink-500">Todavía no hay alumnos cargados.</p>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="text-ink-400">
@@ -61,6 +62,7 @@ export default async function AlumnosPage() {
               })}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>

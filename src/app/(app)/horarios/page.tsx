@@ -22,7 +22,7 @@ export default async function HorariosPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl font-medium text-ink-900">Horarios</h1>
           <p className="mt-1 text-sm text-ink-500">Clases de la semana, todos los profesores del espacio</p>
