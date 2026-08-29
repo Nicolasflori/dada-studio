@@ -29,7 +29,7 @@ export default function NuevoProfesorForm() {
             <input
               name="nombre"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -38,7 +38,7 @@ export default function NuevoProfesorForm() {
               name="email"
               type="email"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -50,7 +50,7 @@ export default function NuevoProfesorForm() {
               max="100"
               defaultValue={50}
               required
-              className="w-20 rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="w-20 rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <button

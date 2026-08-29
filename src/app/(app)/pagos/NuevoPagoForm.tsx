@@ -31,7 +31,7 @@ export default function NuevoPagoForm({ alumnos }: { alumnos: Alumno[] }) {
             <select
               name="alumno_id"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             >
               <option value="">Elegir...</option>
               {alumnos.map((a) => (
@@ -49,7 +49,7 @@ export default function NuevoPagoForm({ alumnos }: { alumnos: Alumno[] }) {
               min="0"
               step="1"
               required
-              className="w-28 rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="w-28 rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -59,7 +59,7 @@ export default function NuevoPagoForm({ alumnos }: { alumnos: Alumno[] }) {
               type="date"
               required
               defaultValue={hoy()}
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -67,7 +67,7 @@ export default function NuevoPagoForm({ alumnos }: { alumnos: Alumno[] }) {
             <input
               name="medio_pago"
               placeholder="efectivo, transferencia..."
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <button

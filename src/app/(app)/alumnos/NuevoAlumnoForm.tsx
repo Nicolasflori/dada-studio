@@ -50,7 +50,7 @@ export default function NuevoAlumnoForm({
             <input
               name="nombre"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -58,7 +58,7 @@ export default function NuevoAlumnoForm({
             <input
               name="contacto"
               placeholder="teléfono"
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -66,7 +66,7 @@ export default function NuevoAlumnoForm({
             <select
               name="clase_id"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             >
               {clases.map((c) => (
                 <option key={c.id} value={c.id}>

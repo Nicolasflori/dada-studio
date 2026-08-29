@@ -68,7 +68,7 @@ export default function AlumnoRow({
                   name="nombre"
                   required
                   defaultValue={alumno.nombre}
-                  className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+                  className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -76,7 +76,7 @@ export default function AlumnoRow({
                 <input
                   name="contacto"
                   defaultValue={alumno.contacto ?? ""}
-                  className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+                  className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
                 />
               </div>
               <label className="flex items-center gap-2 pb-1.5 text-sm text-ink-700">

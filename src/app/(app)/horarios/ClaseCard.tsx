@@ -56,12 +56,12 @@ export default function ClaseCard({
             name="nombre"
             required
             defaultValue={clase.nombre}
-            className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-xs outline-none focus:border-red-600"
+            className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-xs text-ink-900 outline-none focus:border-red-600"
           />
           <select
             name="profesor_id"
             defaultValue={clase.profesor_id}
-            className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-xs outline-none focus:border-red-600"
+            className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-xs text-ink-900 outline-none focus:border-red-600"
           >
             {profesores.map((p) => (
               <option key={p.id} value={p.id}>
@@ -73,7 +73,7 @@ export default function ClaseCard({
             <select
               name="dia"
               defaultValue={clase.dia}
-              className="w-full rounded-sm border-2 border-ink-900 px-2 py-1.5 text-xs capitalize outline-none focus:border-red-600"
+              className="w-full rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-xs text-ink-900 capitalize outline-none focus:border-red-600"
             >
               {DIAS.map((d) => (
                 <option key={d} value={d}>
@@ -85,7 +85,7 @@ export default function ClaseCard({
               name="hora"
               type="time"
               defaultValue={clase.hora.slice(0, 5)}
-              className="w-full rounded-sm border-2 border-ink-900 px-2 py-1.5 text-xs outline-none focus:border-red-600"
+              className="w-full rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-xs text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <button

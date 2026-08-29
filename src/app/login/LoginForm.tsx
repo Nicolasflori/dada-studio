@@ -24,7 +24,7 @@ export default function LoginForm() {
         type="email"
         required
         placeholder="vos@email.com"
-        className="mt-2 w-full rounded-sm border-2 border-ink-900 px-3 py-2 text-sm text-ink-900 outline-none focus:border-red-600"
+        className="mt-2 w-full rounded-sm border-2 border-ink-900 bg-surface px-3 py-2 text-sm text-ink-900 outline-none focus:border-red-600"
       />
 
       <button

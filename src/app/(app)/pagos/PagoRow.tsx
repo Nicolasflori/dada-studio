@@ -90,7 +90,7 @@ export default function PagoRow({
                   step="1"
                   required
                   defaultValue={pago.monto}
-                  className="w-28 rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+                  className="w-28 rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -100,7 +100,7 @@ export default function PagoRow({
                   type="date"
                   required
                   defaultValue={pago.fecha}
-                  className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+                  className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -108,7 +108,7 @@ export default function PagoRow({
                 <input
                   name="medio_pago"
                   defaultValue={pago.medio_pago ?? ""}
-                  className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+                  className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
                 />
               </div>
               <button

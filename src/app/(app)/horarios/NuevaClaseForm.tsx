@@ -32,7 +32,7 @@ export default function NuevaClaseForm({ profesores }: { profesores: Profesor[] 
               name="nombre"
               placeholder="Pintura, Piano, Cerámica..."
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -40,7 +40,7 @@ export default function NuevaClaseForm({ profesores }: { profesores: Profesor[] 
             <select
               name="profesor_id"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             >
               {profesores.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -54,7 +54,7 @@ export default function NuevaClaseForm({ profesores }: { profesores: Profesor[] 
             <select
               name="dia"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm capitalize outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 capitalize outline-none focus:border-red-600"
             >
               {DIAS.map((d) => (
                 <option key={d} value={d}>
@@ -69,7 +69,7 @@ export default function NuevaClaseForm({ profesores }: { profesores: Profesor[] 
               name="hora"
               type="time"
               required
-              className="rounded-sm border-2 border-ink-900 px-2 py-1.5 text-sm outline-none focus:border-red-600"
+              className="rounded-sm border-2 border-ink-900 bg-surface px-2 py-1.5 text-sm text-ink-900 outline-none focus:border-red-600"
             />
           </div>
           <button
