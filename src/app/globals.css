@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink-50: #f4eee1;
+  --ink-100: #e8dcc5;
+  --ink-400: #8a7a66;
+  --ink-500: #6b5d4d;
+  --ink-600: #544737;
+  --ink-700: #3a2f26;
+  --ink-800: #241b15;
+  --ink-900: #171310;
+
+  --red-100: #f6dad5;
+  --red-500: #c81d1d;
+  --red-600: #a3140f;
+  --red-700: #7c0f0c;
+
+  --surface: #ffffff;
+  --paper: #fbf8f0;
+}
+
+.dark {
+  --ink-50: #171310;
+  --ink-100: #2a2018;
+  --ink-400: #a8977f;
+  --ink-500: #b8a892;
+  --ink-600: #c7b9a4;
+  --ink-700: #d9cdb9;
+  --ink-800: #ece3d3;
+  --ink-900: #f4eee1;
+
+  --red-100: #4a201c;
+  --red-500: #ff4133;
+  --red-600: #ff6b5c;
+  --red-700: #ff9086;
+
+  --surface: #221c17;
+}
