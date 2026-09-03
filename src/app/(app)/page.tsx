@@ -51,6 +51,7 @@ export default async function DashboardPage() {
           label="Pendiente de pagar a profesores"
           value={formatoMoneda.format(totalPendiente)}
           hint={`${pendientes.length} pagos sin liquidar`}
+          destacado={totalPendiente > 0}
         />
       </div>
 

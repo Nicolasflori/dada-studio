@@ -1,4 +1,5 @@
 import Sidebar from "@/components/Sidebar";
+import { ToastProvider } from "@/components/ToastProvider";
 import { getProfesorActual } from "@/lib/data";
 import { cerrarSesion } from "./actions";
 
@@ -25,9 +26,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
-      <Sidebar nombreUsuario={profesor.nombre} />
-      <main className="flex-1 overflow-x-hidden p-4 md:p-10">{children}</main>
-    </div>
+    <ToastProvider>
+      <div className="flex min-h-screen flex-col md:flex-row">
+        <Sidebar nombreUsuario={profesor.nombre} />
+        <main className="flex-1 overflow-x-hidden p-4 md:p-10">{children}</main>
+      </div>
+    </ToastProvider>
   );
 }

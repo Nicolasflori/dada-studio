@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(1deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+  }
+}
+
 :root {
   --ink-50: #f4eee1;
   --ink-100: #e8dcc5;

@@ -1,8 +1,10 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { editarProfesor, borrarProfesor } from "./actions";
 import BotonBorrar from "@/components/BotonBorrar";
+import Modal from "@/components/Modal";
+import { useToast } from "@/components/ToastProvider";
 import type { Profesor } from "@/lib/types";
 
 const estadoInicial = { ok: false, mensaje: "" };
@@ -25,7 +27,15 @@ export default function ProfesorCard({
 }) {
   const [editando, setEditando] = useState(false);
   const [estado, formAction, enviando] = useActionState(editarProfesor, estadoInicial);
+  const mostrarToast = useToast();
   const sinConfirmar = !profesor.user_id;
+
+  useEffect(() => {
+    if (!estado.mensaje) return;
+    mostrarToast(estado.mensaje, estado.ok);
+    if (estado.ok) setEditando(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [estado]);
 
   return (
     <div className="rounded-sm border-2 border-ink-900 bg-surface p-5 shadow-[4px_4px_0_0_var(--ink-900)]">
@@ -69,10 +79,10 @@ export default function ProfesorCard({
         <div className="mt-4 flex items-center gap-3 border-t border-ink-100 pt-3">
           <button
             type="button"
-            onClick={() => setEditando((v) => !v)}
+            onClick={() => setEditando(true)}
             className="text-xs font-medium text-ink-700 underline decoration-dotted hover:text-red-700"
           >
-            {editando ? "Cerrar" : "Editar"}
+            Editar
           </button>
           {profesor.rol === "externo" && (
             <BotonBorrar
@@ -84,8 +94,8 @@ export default function ProfesorCard({
         </div>
       )}
 
-      {editando && (
-        <form action={formAction} className="mt-3 flex flex-wrap items-end gap-3 border-t border-ink-100 pt-3">
+      <Modal open={editando} onClose={() => setEditando(false)} title="Editar profesor">
+        <form action={formAction} className="flex flex-col gap-4">
           <input type="hidden" name="id" value={profesor.id} />
           <div className="flex flex-col gap-1">
             <label className="text-xs text-ink-500">Nombre</label>
@@ -111,15 +121,12 @@ export default function ProfesorCard({
           <button
             type="submit"
             disabled={enviando}
-            className="rounded-sm border-2 border-ink-900 bg-ink-900 px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-ink-50 disabled:opacity-60"
+            className="mt-1 rounded-sm border-2 border-ink-900 bg-ink-900 px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-ink-50 disabled:opacity-60"
           >
             {enviando ? "Guardando..." : "Guardar"}
           </button>
-          {estado.mensaje && (
-            <p className={`w-full text-xs ${estado.ok ? "text-ink-600" : "text-red-700"}`}>{estado.mensaje}</p>
-          )}
         </form>
-      )}
+      </Modal>
     </div>
   );
 }

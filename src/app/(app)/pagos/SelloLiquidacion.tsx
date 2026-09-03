@@ -1,10 +1,12 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { alternarLiquidado } from "./actions";
 
 export default function SelloLiquidacion({ pagoId, liquidado }: { pagoId: string; liquidado: boolean }) {
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   return (
     <button
@@ -13,6 +15,7 @@ export default function SelloLiquidacion({ pagoId, liquidado }: { pagoId: string
       onClick={() =>
         startTransition(async () => {
           await alternarLiquidado(pagoId, !liquidado);
+          router.refresh();
         })
       }
       className={`inline-block rounded-sm px-2 py-0.5 text-xs font-semibold uppercase tracking-wide transition-opacity disabled:opacity-50 ${
