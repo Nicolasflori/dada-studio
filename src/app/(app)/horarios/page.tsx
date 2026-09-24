@@ -1,5 +1,6 @@
 import { getAlumnos, getClases, getInscripciones, getProfesorActual, getProfesores } from "@/lib/data";
 import { DIAS } from "@/lib/types";
+import { agruparPor, indexarPorId } from "@/lib/utils";
 import NuevaClaseForm from "./NuevaClaseForm";
 import ClaseCard from "./ClaseCard";
 
@@ -13,11 +14,15 @@ export default async function HorariosPage() {
   ]);
   const esDueña = profesorActual?.rol === "dueño";
 
-  const nombreProfesor = (id: string) => profesores.find((p) => p.id === id)?.nombre ?? "—";
+  const profesoresPorId = indexarPorId(profesores);
+  const alumnosPorId = indexarPorId(alumnos);
+  const inscripcionesPorClase = agruparPor(inscripciones, (i) => i.clase_id);
+  const clasesPorDia = agruparPor(clases, (c) => c.dia);
+
+  const nombreProfesor = (id: string) => profesoresPorId.get(id)?.nombre ?? "—";
   const alumnosDeClase = (claseId: string) =>
-    inscripciones
-      .filter((i) => i.clase_id === claseId)
-      .map((i) => alumnos.find((a) => a.id === i.alumno_id)?.nombre)
+    (inscripcionesPorClase.get(claseId) ?? [])
+      .map((i) => alumnosPorId.get(i.alumno_id)?.nombre)
       .filter((n): n is string => Boolean(n));
 
   return (
@@ -32,7 +37,7 @@ export default async function HorariosPage() {
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {DIAS.map((dia) => {
-          const clasesDelDia = clases.filter((c) => c.dia === dia);
+          const clasesDelDia = clasesPorDia.get(dia) ?? [];
           return (
             <div key={dia} className="rounded-sm border-2 border-ink-900 bg-surface p-4 shadow-[4px_4px_0_0_var(--ink-900)]">
               <h2 className="text-sm font-semibold capitalize text-ink-700">{dia}</h2>

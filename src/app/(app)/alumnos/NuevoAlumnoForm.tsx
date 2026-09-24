@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { crearAlumno } from "./actions";
 import Modal from "@/components/Modal";
-import { useToast } from "@/components/ToastProvider";
+import { useFeedbackDeAccion } from "@/lib/useFeedbackDeAccion";
 import type { Clase, Profesor, Rol } from "@/lib/types";
 
 const estadoInicial = { ok: false, mensaje: "" };
@@ -20,19 +20,13 @@ export default function NuevoAlumnoForm({
   const [abierto, setAbierto] = useState(false);
   const [estado, formAction, enviando] = useActionState(crearAlumno, estadoInicial);
   const formRef = useRef<HTMLFormElement>(null);
-  const mostrarToast = useToast();
 
   const nombreProfesor = (id: string) => profesores.find((p) => p.id === id)?.nombre ?? "—";
 
-  useEffect(() => {
-    if (!estado.mensaje) return;
-    mostrarToast(estado.mensaje, estado.ok);
-    if (estado.ok) {
-      setAbierto(false);
-      formRef.current?.reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estado]);
+  useFeedbackDeAccion(estado, () => {
+    setAbierto(false);
+    formRef.current?.reset();
+  });
 
   if (clases.length === 0) {
     return (

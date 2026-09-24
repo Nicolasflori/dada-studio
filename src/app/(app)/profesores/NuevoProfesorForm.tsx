@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { crearProfesor } from "./actions";
 import Modal from "@/components/Modal";
-import { useToast } from "@/components/ToastProvider";
+import { useFeedbackDeAccion } from "@/lib/useFeedbackDeAccion";
 
 const estadoInicial = { ok: false, mensaje: "" };
 
@@ -11,17 +11,11 @@ export default function NuevoProfesorForm() {
   const [abierto, setAbierto] = useState(false);
   const [estado, formAction, enviando] = useActionState(crearProfesor, estadoInicial);
   const formRef = useRef<HTMLFormElement>(null);
-  const mostrarToast = useToast();
 
-  useEffect(() => {
-    if (!estado.mensaje) return;
-    mostrarToast(estado.mensaje, estado.ok);
-    if (estado.ok) {
-      setAbierto(false);
-      formRef.current?.reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estado]);
+  useFeedbackDeAccion(estado, () => {
+    setAbierto(false);
+    formRef.current?.reset();
+  });
 
   return (
     <>

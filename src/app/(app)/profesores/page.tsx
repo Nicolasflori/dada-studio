@@ -1,4 +1,5 @@
 import { getAlumnos, getPagos, getProfesorActual, getProfesores } from "@/lib/data";
+import { agruparPor } from "@/lib/utils";
 import NuevoProfesorForm from "./NuevoProfesorForm";
 import ProfesorCard from "./ProfesorCard";
 
@@ -11,6 +12,15 @@ export default async function ProfesoresPage() {
   ]);
   const esDueña = profesorActual?.rol === "dueño";
 
+  const alumnosActivosPorProfesor = agruparPor(
+    alumnos.filter((a) => a.activo),
+    (a) => a.profesor_id,
+  );
+  const pagosPendientesPorProfesor = agruparPor(
+    pagos.filter((p) => !p.liquidado),
+    (p) => p.profesor_id,
+  );
+
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -20,8 +30,8 @@ export default async function ProfesoresPage() {
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {profesores.map((prof) => {
-          const alumnosDelProfesor = alumnos.filter((a) => a.profesor_id === prof.id && a.activo);
-          const pagosPendientes = pagos.filter((p) => p.profesor_id === prof.id && !p.liquidado);
+          const alumnosDelProfesor = alumnosActivosPorProfesor.get(prof.id) ?? [];
+          const pagosPendientes = pagosPendientesPorProfesor.get(prof.id) ?? [];
           const pctProfesor = 1 - prof.porcentaje_taller / 100;
           const pendiente = pagosPendientes.reduce((acc, p) => acc + p.monto * pctProfesor, 0);
 

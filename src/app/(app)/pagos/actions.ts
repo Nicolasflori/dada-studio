@@ -9,7 +9,7 @@ export async function crearPago(_prevState: unknown, formData: FormData) {
   const fecha = String(formData.get("fecha") ?? "");
   const medioPago = String(formData.get("medio_pago") ?? "").trim();
 
-  if (!alumnoId || !monto || !fecha) {
+  if (!alumnoId || Number.isNaN(monto) || monto < 0 || !fecha) {
     return { ok: false, mensaje: "Completá alumno, monto y fecha." };
   }
 
@@ -67,7 +67,7 @@ export async function editarPago(_prevState: unknown, formData: FormData) {
   const fecha = String(formData.get("fecha") ?? "");
   const medioPago = String(formData.get("medio_pago") ?? "").trim();
 
-  if (!pagoId || !monto || !fecha) {
+  if (!pagoId || Number.isNaN(monto) || monto < 0 || !fecha) {
     return { ok: false, mensaje: "Completá monto y fecha." };
   }
 

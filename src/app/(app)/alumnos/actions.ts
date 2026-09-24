@@ -39,7 +39,10 @@ export async function crearAlumno(_prevState: unknown, formData: FormData) {
     .insert({ alumno_id: alumno.id, clase_id: claseId });
 
   if (errorInscripcion) {
-    return { ok: false, mensaje: `${nombre} se guardó, pero no se pudo anotar en la clase.` };
+    // El alumno sin inscripción queda "huérfano" (no aparece en ninguna clase);
+    // deshacemos el insert anterior para no dejar el dato a mitad de camino.
+    await supabase.from("alumnos").delete().eq("id", alumno.id);
+    return { ok: false, mensaje: "No se pudo anotar al alumno en la clase. Probá de nuevo." };
   }
 
   revalidatePath("/alumnos");

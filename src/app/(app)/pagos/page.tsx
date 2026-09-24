@@ -1,4 +1,5 @@
 import { getAlumnos, getPagos, getProfesorActual, getProfesores } from "@/lib/data";
+import { indexarPorId } from "@/lib/utils";
 import NuevoPagoForm from "./NuevoPagoForm";
 import PagoRow from "./PagoRow";
 
@@ -11,8 +12,10 @@ export default async function PagosPage() {
   ]);
   const esDueña = profesorActual?.rol === "dueño";
 
-  const nombreAlumno = (id: string) => alumnos.find((a) => a.id === id)?.nombre ?? "—";
-  const profesorDe = (id: string) => profesores.find((p) => p.id === id);
+  const alumnosPorId = indexarPorId(alumnos);
+  const profesoresPorId = indexarPorId(profesores);
+  const nombreAlumno = (id: string) => alumnosPorId.get(id)?.nombre ?? "—";
+  const profesorDe = (id: string) => profesoresPorId.get(id);
 
   return (
     <div>

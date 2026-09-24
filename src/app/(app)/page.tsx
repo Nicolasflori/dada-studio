@@ -1,5 +1,6 @@
 import StatCard from "@/components/StatCard";
 import { getAlumnos, getPagos, getProfesores } from "@/lib/data";
+import { indexarPorId } from "@/lib/utils";
 import SelloLiquidacion from "./pagos/SelloLiquidacion";
 
 const formatoMoneda = new Intl.NumberFormat("es-AR", {
@@ -10,13 +11,15 @@ const formatoMoneda = new Intl.NumberFormat("es-AR", {
 
 export default async function DashboardPage() {
   const [alumnos, pagos, profesores] = await Promise.all([getAlumnos(), getPagos(), getProfesores()]);
+  const alumnosPorId = indexarPorId(alumnos);
+  const profesoresPorId = indexarPorId(profesores);
 
   const ahora = new Date();
   const mesActual = ahora.toISOString().slice(0, 7);
   const etiquetaMes = ahora.toLocaleDateString("es-AR", { month: "long", year: "numeric" });
 
   const pctProfesorDe = (profesorId: string) => {
-    const profesor = profesores.find((prof) => prof.id === profesorId);
+    const profesor = profesoresPorId.get(profesorId);
     return profesor ? 1 - profesor.porcentaje_taller / 100 : 0;
   };
 
@@ -27,8 +30,8 @@ export default async function DashboardPage() {
   const pendientes = pagos.filter((p) => !p.liquidado && pctProfesorDe(p.profesor_id) > 0);
   const totalPendiente = pendientes.reduce((acc, p) => acc + p.monto * pctProfesorDe(p.profesor_id), 0);
 
-  const nombreAlumno = (id: string) => alumnos.find((a) => a.id === id)?.nombre ?? "—";
-  const nombreProfesor = (id: string) => profesores.find((p) => p.id === id)?.nombre ?? "—";
+  const nombreAlumno = (id: string) => alumnosPorId.get(id)?.nombre ?? "—";
+  const nombreProfesor = (id: string) => profesoresPorId.get(id)?.nombre ?? "—";
   const ultimosPagos = pagos.slice(0, 8);
 
   return (

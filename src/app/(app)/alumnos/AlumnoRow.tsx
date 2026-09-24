@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import { editarAlumno, borrarAlumno } from "./actions";
 import BotonBorrar from "@/components/BotonBorrar";
 import Modal from "@/components/Modal";
-import { useToast } from "@/components/ToastProvider";
+import { useFeedbackDeAccion } from "@/lib/useFeedbackDeAccion";
 import type { Alumno } from "@/lib/types";
 
 const estadoInicial = { ok: false, mensaje: "" };
@@ -22,14 +22,8 @@ export default function AlumnoRow({
 }) {
   const [editando, setEditando] = useState(false);
   const [estado, formAction, enviando] = useActionState(editarAlumno, estadoInicial);
-  const mostrarToast = useToast();
 
-  useEffect(() => {
-    if (!estado.mensaje) return;
-    mostrarToast(estado.mensaje, estado.ok);
-    if (estado.ok) setEditando(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estado]);
+  useFeedbackDeAccion(estado, () => setEditando(false));
 
   return (
     <tr className="border-t border-ink-50">

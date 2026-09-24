@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import { editarPago, borrarPago } from "./actions";
 import BotonBorrar from "@/components/BotonBorrar";
 import Modal from "@/components/Modal";
-import { useToast } from "@/components/ToastProvider";
+import { useFeedbackDeAccion } from "@/lib/useFeedbackDeAccion";
 import SelloLiquidacion from "./SelloLiquidacion";
 import type { Pago } from "@/lib/types";
 
@@ -32,15 +32,9 @@ export default function PagoRow({
 }) {
   const [editando, setEditando] = useState(false);
   const [estado, formAction, enviando] = useActionState(editarPago, estadoInicial);
-  const mostrarToast = useToast();
   const hayReparto = montoProfesor > 0;
 
-  useEffect(() => {
-    if (!estado.mensaje) return;
-    mostrarToast(estado.mensaje, estado.ok);
-    if (estado.ok) setEditando(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estado]);
+  useFeedbackDeAccion(estado, () => setEditando(false));
 
   return (
     <tr className="border-t border-ink-50 align-top">

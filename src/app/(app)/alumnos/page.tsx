@@ -1,4 +1,5 @@
 import { getAlumnos, getClases, getInscripciones, getProfesorActual, getProfesores } from "@/lib/data";
+import { agruparPor, indexarPorId } from "@/lib/utils";
 import NuevoAlumnoForm from "./NuevoAlumnoForm";
 import AlumnoRow from "./AlumnoRow";
 
@@ -12,11 +13,14 @@ export default async function AlumnosPage() {
   ]);
   const esDueña = profesorActual?.rol === "dueño";
 
-  const nombreProfesor = (id: string) => profesores.find((p) => p.id === id)?.nombre ?? "—";
+  const profesoresPorId = indexarPorId(profesores);
+  const clasesPorId = indexarPorId(clases);
+  const inscripcionesPorAlumno = agruparPor(inscripciones, (i) => i.alumno_id);
+
+  const nombreProfesor = (id: string) => profesoresPorId.get(id)?.nombre ?? "—";
   const clasesDe = (alumnoId: string) =>
-    inscripciones
-      .filter((i) => i.alumno_id === alumnoId)
-      .map((i) => clases.find((c) => c.id === i.clase_id))
+    (inscripcionesPorAlumno.get(alumnoId) ?? [])
+      .map((i) => clasesPorId.get(i.clase_id))
       .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (

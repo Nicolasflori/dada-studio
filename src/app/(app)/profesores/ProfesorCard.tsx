@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import { editarProfesor, borrarProfesor } from "./actions";
 import BotonBorrar from "@/components/BotonBorrar";
 import Modal from "@/components/Modal";
-import { useToast } from "@/components/ToastProvider";
+import { useFeedbackDeAccion } from "@/lib/useFeedbackDeAccion";
 import type { Profesor } from "@/lib/types";
 
 const estadoInicial = { ok: false, mensaje: "" };
@@ -27,15 +27,9 @@ export default function ProfesorCard({
 }) {
   const [editando, setEditando] = useState(false);
   const [estado, formAction, enviando] = useActionState(editarProfesor, estadoInicial);
-  const mostrarToast = useToast();
   const sinConfirmar = !profesor.user_id;
 
-  useEffect(() => {
-    if (!estado.mensaje) return;
-    mostrarToast(estado.mensaje, estado.ok);
-    if (estado.ok) setEditando(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estado]);
+  useFeedbackDeAccion(estado, () => setEditando(false));
 
   return (
     <div className="rounded-sm border-2 border-ink-900 bg-surface p-5 shadow-[4px_4px_0_0_var(--ink-900)]">
